@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+<!-- 	
+	<context:component-scan base-package="com.jacob" />
+	<context:component-scan base-package="com.widgetvendor" />
+
+ -->
+<!-- 	
+	<jaxws:endpoint id="helloWorld" implementor="com.jacob.sample.OrderWidgetsWebService"
+		address="/HelloWorld" />
+		 -->
+		<jaxws:endpoint id="helloWorld" address="/HelloWorld" implementor="com.widgetvendor.widgetorderform.OrderWidgets"
+wsdlLocation="classpath:META-INF/sample/widgetOrderForm.wsdl">
+<!-- 
+                    address="/cartesSim"
+                    xmlns:s="http://monappli.com/cartesSim/cartesSim/V1"
+                    serviceName="s:CartesSim"
+                    >
+                     -->
+    <jaxws:dataBinding>
+        <bean class="org.apache.cxf.jaxb.JAXBDataBinding"/>
+    </jaxws:dataBinding>
+</jaxws:endpoint>
+
+</beans>
+<!-- END SNIPPET: beans -->
