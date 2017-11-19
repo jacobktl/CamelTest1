@@ -12,8 +12,7 @@
 
  -->
  	
-	<jaxws:endpoint id="helloWorld" implementor="org.example.ui.UiImpl"
-		address="/ssss" />
+
 		 <jaxws:endpoint id="helloWorld1" address="/HelloWorld" 
 		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortTypeImpl">
 <!-- 		 
