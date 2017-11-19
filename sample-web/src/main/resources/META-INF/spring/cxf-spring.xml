@@ -11,21 +11,27 @@
 	<context:component-scan base-package="com.widgetvendor" />
 
  -->
-<!-- 	
-	<jaxws:endpoint id="helloWorld" implementor="com.jacob.sample.OrderWidgetsWebService"
-		address="/HelloWorld" />
+ 	
+	<jaxws:endpoint id="helloWorld" implementor="org.example.ui.UiImpl"
+		address="/ssss" />
+		 <jaxws:endpoint id="helloWorld1" address="/HelloWorld" 
+		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortTypeImpl">
+<!-- 		 
+		<jaxws:endpoint id="helloWorld" address="/HelloWorld" 
+		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortType">
 		 -->
-		<jaxws:endpoint id="helloWorld" address="/HelloWorld" implementor="com.widgetvendor.widgetorderform.OrderWidgets"
-wsdlLocation="classpath:META-INF/sample/widgetOrderForm.wsdl">
-<!-- 
+<!--
+wsdlLocation="classpath:META-INF/sample/HelloService.wsdl">
+ 
                     address="/cartesSim"
                     xmlns:s="http://monappli.com/cartesSim/cartesSim/V1"
                     serviceName="s:CartesSim"
                     >
-                     -->
+                     
     <jaxws:dataBinding>
         <bean class="org.apache.cxf.jaxb.JAXBDataBinding"/>
     </jaxws:dataBinding>
+    -->
 </jaxws:endpoint>
 
 </beans>

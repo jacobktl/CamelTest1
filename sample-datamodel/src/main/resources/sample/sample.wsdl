@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="widgetOrderForm.wsdl"
+    targetNamespace="http://widgetVendor.com/widgetOrderForm"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://widgetVendor.com/widgetOrderForm"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd1="http://widgetVendor.com/types/widgetTypes"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+ 
+<types>
+  <schema targetNamespace="http://widgetVendor.com/types/widgetTypes"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <element name="keyElem" type="xsd:base64Binary"/>
+  </schema>
+</types>
+ 
+<message name="widgetOrder">
+  <part name="numOrdered" type="xsd:int"/>
+  <part name="keyVal" element="xsd1:keyElem"/>
+</message>
+<message name="widgetOrderBill">
+  <part name="price" type="xsd:float"/>
+  <part name="keyVal" element="xsd1:keyElem"/>
+</message>
+<message name="badSize">
+  <part name="numInventory" type="xsd:int"/>
+</message>
+ 
+<portType name="orderWidgets">
+  <operation name="placeWidgetOrder">
+    <input message="tns:widgetOrder" name="order"/>
+    <output message="tns:widgetOrderBill" name="bill"/>
+    <fault message="tns:badSize" name="sizeFault"/>
+  </operation>
+</portType>
+ 
+<binding name="orderWidgetsBinding" type="tns:orderWidgets">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="placeWidgetOrder">
+      <soap:operation soapAction="" style="document"/>
+      <input name="order">
+        <soap:body use="literal" parts="numOrdered"/>
+        <soap:header message="tns:widgetOrder" part="keyVal"/>
+      </input>
+      <output name="bill">
+        <soap:body use="literal" parts="bill"/>
+        <soap:header message="tns:widgetOrderBill" part="keyVal"/>
+      </output>
+      <fault name="sizeFault">
+        <soap:body use="literal"/>
+      </fault>
+  </operation>
+</binding>
+ 
+   <service name = "Hello_Service">
+      <port binding = "tns:orderWidgetsBinding" name = "Hello_Port">
+         <soap:address location = "http://localhost:8080/SayHello/" />
+      </port>
+   </service>
+    
+</definitions>
