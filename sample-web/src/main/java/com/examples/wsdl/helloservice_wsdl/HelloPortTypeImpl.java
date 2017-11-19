@@ -5,6 +5,8 @@ public class HelloPortTypeImpl implements HelloPortType{
 
 	public String sayHello(String firstName) {
 		// TODO Auto-generated method stub
+		System.out.println("its is called with : "+firstName);
+		org.apache.cxf.transport.http.DestinationRegistry ttyy;
 		return "Helloo "+firstName;
 	}
 

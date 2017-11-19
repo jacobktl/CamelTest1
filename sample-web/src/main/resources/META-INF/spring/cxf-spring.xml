@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
-	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
+<!--    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-<!-- 	
-	<context:component-scan base-package="com.jacob" />
-	<context:component-scan base-package="com.widgetvendor" />
+	<!-- <context:component-scan base-package="com.jacob" /> <context:component-scan 
+		base-package="com.widgetvendor" /> -->
 
- -->
- 	
+ <context:annotation-config />
 
-		 <jaxws:endpoint id="helloWorld1" address="/HelloWorld" 
-		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortTypeImpl">
-<!-- 		 
-		<jaxws:endpoint id="helloWorld" address="/HelloWorld" 
-		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortType">
-		 -->
-<!--
-wsdlLocation="classpath:META-INF/sample/HelloService.wsdl">
- 
-                    address="/cartesSim"
-                    xmlns:s="http://monappli.com/cartesSim/cartesSim/V1"
-                    serviceName="s:CartesSim"
-                    >
-                     
-    <jaxws:dataBinding>
-        <bean class="org.apache.cxf.jaxb.JAXBDataBinding"/>
-    </jaxws:dataBinding>
-    -->
-</jaxws:endpoint>
+    <bean class="com.jacob.sample.config.SpringConfig"/>
 
+    <!-- be sure to include the JavaConfig bean post-processor -->
+<!--     <bean class="org.springframework.config.java.process.ConfigurationPostProcessor"/> -->
+ <!--   
+	<jaxws:endpoint id="helloWorld1" address="/HelloWorld" bus="cxf"
+		implementor="com.examples.wsdl.helloservice_wsdl.HelloPortTypeImpl" />
+   -->
+<cxf:cxfEndpoint id="helloWorld1"
+address="/HelloWorld" 
+serviceClass="com.examples.wsdl.helloservice_wsdl.HelloPortTypeImpl" />
+	       
 </beans>
-<!-- END SNIPPET: beans -->
